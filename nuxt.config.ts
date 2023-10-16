@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
+  modules: [
+    "@vite-pwa/nuxt",
+  ],
   app: {
     head: {
       title: "Rise Pay",
@@ -67,5 +70,53 @@ export default defineNuxtConfig({
         },
       ],
     }
-  }
+  },
+  pwa: {
+    srcDir: "./service-worker",
+    filename: "sw.js",
+    strategies: "injectManifest",
+    injectRegister: false,
+
+    injectManifest: {
+      globPatterns: [
+        "**/*.{js,json,css,txt,svg,png,ico,webp,woff,woff2,ttf,eot,otf,wasm}",
+      ],
+      globIgnores: ["manifest**.webmanifest"],
+    },
+
+    // default config
+    includeAssets: ["favicon/favicon.ico", "favicon/safari-pinned-tab.svg"],
+    manifest: {
+      name: "Rise Pay",
+      short_name: "Rise",
+      description: "Global Workforce Payments & Compliance",
+      theme_color: "#5E59EB",
+      icons: [
+        {
+          src: "/pwa/rise_x192.png",
+          sizes: "192x192",
+          type: "image/png",
+          purpose: "any",
+        },
+        {
+          src: "/pwa/rise_x192_mask.png",
+          sizes: "192x192",
+          type: "image/png",
+          purpose: "maskable",
+        },
+        {
+          src: "/pwa/rise_x512.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "any",
+        },
+        {
+          src: "/pwa/rise_x512_mask.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "maskable",
+        },
+      ],
+    },
+  },
 })
