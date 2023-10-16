@@ -1,5 +1,5 @@
 <template>
   <div>
-    Welcome to Rise!
+    Welcome to Rise! wolf
   </div>
 </template>
